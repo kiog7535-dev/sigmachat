@@ -1,0 +1,163 @@
+{
+  "users": [
+    {
+      "id": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "username": "Admin",
+      "displayName": "SigmaChat",
+      "password": "$2b$12$BJwlSmZQ.tukT8fQCeDBp.eg0a1w74s7QODVQ052x40a2e6s6MzSe",
+      "avatar": "https://i.pinimg.com/736x/9b/ec/82/9bec8214e39c7c3e667178bf3e87f80f.jpg",
+      "banner": "",
+      "bio": "OFFICIAL SigmaChat Administrator.",
+      "status": "online",
+      "isAdmin": true,
+      "verified": true,
+      "goldVerified": true,
+      "joinDate": "2026-06-24T13:49:44.420Z",
+      "createdAt": "2026-06-24T13:49:44.420Z",
+      "servers": [
+        "38e93ebc-f5ef-441e-b52e-25c531df73de"
+      ]
+    }
+  ],
+  "servers": [
+    {
+      "id": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "name": "Sigma Chat",
+      "description": "The official Sigma Chat server",
+      "icon": "🚀",
+      "owner": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "members": [
+        "660d085a-4780-4948-8bf2-c35ba790f530"
+      ],
+      "channels": [
+        "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+        "fa72c914-57ef-4862-aede-ef6cf6587bf0",
+        "623d4dde-0cb4-4619-b3b1-9961344b3b0d"
+      ],
+      "createdAt": "2026-06-24T13:49:44.420Z"
+    }
+  ],
+  "channels": [
+    {
+      "id": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "name": "general",
+      "createdAt": "2026-06-24T13:49:44.420Z"
+    },
+    {
+      "id": "fa72c914-57ef-4862-aede-ef6cf6587bf0",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "name": "gaming",
+      "createdAt": "2026-06-24T13:49:44.420Z"
+    },
+    {
+      "id": "623d4dde-0cb4-4619-b3b1-9961344b3b0d",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "name": "memes",
+      "createdAt": "2026-06-24T13:49:44.420Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "88157899-27db-4bb4-8903-1da93f76ca9b",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "Gi",
+      "createdAt": "2026-06-24T13:50:25.981Z",
+      "edited": false
+    },
+    {
+      "id": "da07a5d4-eea7-4707-8966-3f3e57d0aa4e",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "getg4d4",
+      "createdAt": "2026-06-24T13:50:31.214Z",
+      "edited": false
+    },
+    {
+      "id": "b2b40934-9b6a-409d-98b4-c41d9f8d6a6a",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "fg",
+      "createdAt": "2026-06-24T13:50:31.303Z",
+      "edited": false
+    },
+    {
+      "id": "03623f5d-4221-4799-b41b-b2857e3ffb85",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "fef",
+      "createdAt": "2026-06-24T13:50:31.552Z",
+      "edited": false
+    },
+    {
+      "id": "e775378c-561f-49c9-8182-6a415e18beb4",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "fe",
+      "createdAt": "2026-06-24T13:50:31.678Z",
+      "edited": false
+    },
+    {
+      "id": "ed44a51a-3ffc-4bb4-9bc3-a69c2d02f685",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "fe",
+      "createdAt": "2026-06-24T13:50:31.809Z",
+      "edited": false
+    },
+    {
+      "id": "0523cabd-a089-4e19-b070-efb5593a9203",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "fe",
+      "createdAt": "2026-06-24T13:50:31.932Z",
+      "edited": false
+    },
+    {
+      "id": "ad116db5-ddd6-43e0-90a5-bc26dd512fac",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "f",
+      "createdAt": "2026-06-24T13:50:32.051Z",
+      "edited": false
+    },
+    {
+      "id": "1e8aabf1-23e8-44c2-bd2b-9dcd0b466ec0",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "s",
+      "createdAt": "2026-06-24T13:51:04.933Z",
+      "edited": false
+    },
+    {
+      "id": "92af1e71-1ff4-4f9e-a496-16071c9cb039",
+      "serverId": "38e93ebc-f5ef-441e-b52e-25c531df73de",
+      "channelId": "574e2503-c198-48ee-8c6b-c7fb97ba3ec5",
+      "authorId": "660d085a-4780-4948-8bf2-c35ba790f530",
+      "content": "f4",
+      "createdAt": "2026-06-24T13:51:39.155Z",
+      "edited": false
+    }
+  ],
+  "dms": [],
+  "dmMessages": [],
+  "groups": [],
+  "groupMessages": [],
+  "friendRequests": [],
+  "friendships": [],
+  "notifications": [],
+  "bans": [],
+  "timeouts": [],
+  "pinnedMessages": [],
+  "moderationLogs": []
+}
