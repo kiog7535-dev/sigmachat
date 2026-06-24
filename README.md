@@ -12,9 +12,7 @@
   Open http://localhost:8080
 
   ## Default admin account
-
-  - Username: `Admin`
-  - Password: `whatthesigma`
+no
 
   ## Stack
 
