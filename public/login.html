@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sigma Chat — Login</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">⚡</div>
+      <h1 class="auth-title">Welcome back!</h1>
+      <p class="auth-subtitle">Sign in to Sigma Chat</p>
+      <div id="auth-error" class="auth-error hidden"></div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">USERNAME</label>
+          <input type="text" id="username" placeholder="Your username" autocomplete="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">PASSWORD</label>
+          <input type="password" id="password" placeholder="Your password" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="auth-btn" id="login-btn">Log In</button>
+      </form>
+      <p class="auth-switch">Don't have an account? <a href="/register.html">Register</a></p>
+    </div>
+    <div class="auth-bg-art">
+      <div class="bg-blob blob-1"></div>
+      <div class="bg-blob blob-2"></div>
+      <div class="bg-blob blob-3"></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      const errEl = document.getElementById('auth-error');
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+      errEl.classList.add('hidden');
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Login failed');
+        window.location.href = '/';
+      } catch (err) {
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+      }
+    });
+  </script>
+</body>
+</html>

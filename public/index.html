@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sigma Chat</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app" class="app-layout hidden">
+
+    <!-- Server Dock -->
+    <nav id="server-dock" class="server-dock">
+      <div class="dock-home dock-item tooltip-wrap" id="btn-home" title="Direct Messages">
+        <span class="dock-icon">⚡</span>
+        <span class="tooltip-label">Direct Messages</span>
+      </div>
+      <div class="dock-separator"></div>
+      <div id="server-list" class="dock-servers"></div>
+      <div class="dock-separator"></div>
+      <div class="dock-item tooltip-wrap" id="btn-add-server" title="Add a Server">
+        <span class="dock-icon add-icon">+</span>
+        <span class="tooltip-label">Add a Server</span>
+      </div>
+      <div class="dock-item tooltip-wrap" id="btn-discover" title="Discover Servers">
+        <span class="dock-icon">🧭</span>
+        <span class="tooltip-label">Discover Servers</span>
+      </div>
+    </nav>
+
+    <!-- Second Sidebar (channels / DMs) -->
+    <aside id="sidebar" class="sidebar">
+      <div id="sidebar-header" class="sidebar-header">
+        <span id="sidebar-title">Direct Messages</span>
+        <button id="btn-sidebar-action" class="sidebar-action-btn" title="New DM">✏</button>
+      </div>
+      <div id="sidebar-content" class="sidebar-content"></div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <header id="chat-header" class="chat-header">
+        <div class="chat-header-left">
+          <span id="chat-header-icon" class="chat-header-icon">#</span>
+          <span id="chat-header-name">Select a channel</span>
+        </div>
+        <div class="chat-header-right">
+          <button class="header-btn tooltip-wrap" id="btn-pinned" title="Pinned Messages">📌<span class="tooltip-label">Pinned Messages</span></button>
+          <button class="header-btn tooltip-wrap" id="btn-members" title="Member List">👥<span class="tooltip-label">Toggle Members</span></button>
+          <button class="header-btn tooltip-wrap" id="btn-search-users" title="Search Users">🔍<span class="tooltip-label">Search Users</span></button>
+        </div>
+      </header>
+
+      <div id="messages-area" class="messages-area">
+        <div id="messages-list" class="messages-list"></div>
+        <div id="typing-indicator" class="typing-indicator hidden"></div>
+      </div>
+
+      <footer class="message-input-area">
+        <div id="message-input-wrapper" class="message-input-wrapper">
+          <button id="btn-emoji" class="input-btn tooltip-wrap" title="Emoji">😊<span class="tooltip-label">Emoji</span></button>
+          <textarea id="message-input" class="message-input" placeholder="Message #general" rows="1" maxlength="2000"></textarea>
+          <button id="btn-send" class="send-btn">Send</button>
+        </div>
+        <div id="timeout-bar" class="timeout-bar hidden">You are currently timed out and cannot send messages.</div>
+      </footer>
+    </main>
+
+    <!-- Member List / Right Sidebar -->
+    <aside id="member-list" class="member-list">
+      <div class="member-list-header">Members</div>
+      <div id="members-content" class="members-content"></div>
+    </aside>
+
+    <!-- User Profile Bar (bottom left) -->
+    <div id="user-bar" class="user-bar">
+      <div class="user-bar-avatar-wrap" id="btn-my-profile">
+        <div id="my-avatar" class="user-bar-avatar"></div>
+        <div id="my-status-dot" class="status-dot status-online"></div>
+      </div>
+      <div class="user-bar-info">
+        <div id="my-username" class="user-bar-name"></div>
+        <div id="my-tag" class="user-bar-tag">#0001</div>
+      </div>
+      <div class="user-bar-actions">
+        <button class="user-bar-btn tooltip-wrap" id="btn-toggle-status" title="Change Status">🔵<span class="tooltip-label">Change Status</span></button>
+        <button class="user-bar-btn tooltip-wrap" id="btn-notifications" title="Notifications">🔔<span class="tooltip-label">Notifications</span></button>
+        <button class="user-bar-btn tooltip-wrap" id="btn-settings" title="Settings / Admin">⚙<span class="tooltip-label">Settings</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals & Overlays -->
+  <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+  <!-- Profile Card -->
+  <div id="profile-card" class="profile-card hidden">
+    <button class="close-btn" id="close-profile">✕</button>
+    <div id="profile-banner" class="profile-banner"></div>
+    <div class="profile-avatar-wrap">
+      <div id="profile-avatar" class="profile-avatar-large"></div>
+      <div id="profile-status-dot" class="status-dot"></div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-name-row">
+        <span id="profile-display-name" class="profile-display-name"></span>
+        <span id="profile-badges" class="profile-badges"></span>
+      </div>
+      <div id="profile-username" class="profile-username"></div>
+      <div id="profile-bio" class="profile-bio"></div>
+      <div class="profile-meta">
+        <span id="profile-joined"></span>
+        <span id="profile-friends"></span>
+        <span id="profile-mutual"></span>
+      </div>
+      <div class="profile-actions" id="profile-actions"></div>
+    </div>
+  </div>
+
+  <!-- Create Server Modal -->
+  <div id="modal-create-server" class="modal hidden">
+    <div class="modal-card">
+      <h2>Create a Server</h2>
+      <div class="form-group"><label>SERVER NAME</label><input type="text" id="new-server-name" placeholder="My Awesome Server" maxlength="50" /></div>
+      <div class="form-group"><label>DESCRIPTION</label><input type="text" id="new-server-desc" placeholder="What's this server about?" maxlength="200" /></div>
+      <div class="form-group"><label>SERVER ICON (emoji)</label><input type="text" id="new-server-icon" placeholder="🚀" maxlength="4" /></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancel-create-server">Cancel</button>
+        <button class="btn-primary" id="confirm-create-server">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Channel Modal -->
+  <div id="modal-create-channel" class="modal hidden">
+    <div class="modal-card">
+      <h2>Create Channel</h2>
+      <div class="form-group"><label>CHANNEL NAME</label><input type="text" id="new-channel-name" placeholder="new-channel" maxlength="32" /></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancel-create-channel">Cancel</button>
+        <button class="btn-primary" id="confirm-create-channel">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Group Modal -->
+  <div id="modal-create-group" class="modal hidden">
+    <div class="modal-card">
+      <h2>Create Group Chat</h2>
+      <div class="form-group"><label>GROUP NAME</label><input type="text" id="new-group-name" placeholder="My Group" maxlength="50" /></div>
+      <div class="form-group"><label>ADD FRIENDS (click to add)</label><div id="group-friend-picker" class="friend-picker"></div></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancel-create-group">Cancel</button>
+        <button class="btn-primary" id="confirm-create-group">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="modal-search" class="modal hidden">
+    <div class="modal-card modal-search-card">
+      <h2>Search Users</h2>
+      <div class="form-group"><input type="text" id="search-input" placeholder="Search by username..." /></div>
+      <div id="search-results" class="search-results"></div>
+      <div class="modal-actions"><button class="btn-cancel" id="cancel-search">Close</button></div>
+    </div>
+  </div>
+
+  <!-- Discover Servers Modal -->
+  <div id="modal-discover" class="modal hidden">
+    <div class="modal-card">
+      <h2>Discover Servers</h2>
+      <div id="discover-list" class="discover-list"></div>
+      <div class="modal-actions"><button class="btn-cancel" id="cancel-discover">Close</button></div>
+    </div>
+  </div>
+
+  <!-- Notifications Panel -->
+  <div id="notifications-panel" class="notifications-panel hidden">
+    <div class="notif-header"><span>Notifications</span><button id="btn-read-all">Mark all read</button></div>
+    <div id="notif-list" class="notif-list"></div>
+  </div>
+
+  <!-- Status Picker -->
+  <div id="status-picker" class="status-picker hidden">
+    <div class="status-option" data-status="online"><span class="status-dot status-online"></span> Online</div>
+    <div class="status-option" data-status="idle"><span class="status-dot status-idle"></span> Idle</div>
+    <div class="status-option" data-status="dnd"><span class="status-dot status-dnd"></span> Do Not Disturb</div>
+    <div class="status-option" data-status="offline"><span class="status-dot status-offline"></span> Invisible</div>
+  </div>
+
+  <!-- Pinned Panel -->
+  <div id="pinned-panel" class="pinned-panel hidden">
+    <div class="pinned-header"><span>📌 Pinned Messages</span><button id="close-pinned">✕</button></div>
+    <div id="pinned-list" class="pinned-list"></div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="admin-panel" class="modal hidden">
+    <div class="modal-card admin-card">
+      <h2>⚙ Admin Dashboard</h2>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="users">Users</button>
+        <button class="admin-tab" data-tab="bans">Bans</button>
+        <button class="admin-tab" data-tab="logs">Logs</button>
+      </div>
+      <div id="admin-search-wrap" class="form-group"><input type="text" id="admin-search" placeholder="Search users..." /></div>
+      <div id="admin-content" class="admin-content"></div>
+      <div class="modal-actions"><button class="btn-cancel" id="close-admin">Close</button></div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="modal-edit-profile" class="modal hidden">
+    <div class="modal-card">
+      <h2>Edit Profile</h2>
+      <div class="form-group"><label>DISPLAY NAME</label><input type="text" id="edit-display-name" maxlength="32" /></div>
+      <div class="form-group"><label>BIO</label><textarea id="edit-bio" maxlength="300" rows="3"></textarea></div>
+      <div class="form-group"><label>AVATAR (URL or Base64)</label><input type="text" id="edit-avatar" placeholder="https://..." /></div>
+      <div class="form-group"><label>BANNER (URL or Base64)</label><input type="text" id="edit-banner" placeholder="https://..." /></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancel-edit-profile">Cancel</button>
+        <button class="btn-primary" id="confirm-edit-profile">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Context Menu -->
+  <div id="context-menu" class="context-menu hidden">
+    <div id="context-items"></div>
+  </div>
+
+  <!-- Emoji Picker -->
+  <div id="emoji-picker" class="emoji-picker hidden">
+    <div class="emoji-grid" id="emoji-grid"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
